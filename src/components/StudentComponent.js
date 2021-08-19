@@ -45,13 +45,13 @@ function RenderSideBar(props) {
             <i class="fa fa-book" aria-hidden="true"></i> Subjects
           </NavLink>
           <NavLink className="nav-link" to="/home">
-            <i class="fa fa-check-circle-o" aria-hidden="true"></i> Attendance
+            <i class="fa fa-check-circle-o" aria-hidden="true"></i> Library
           </NavLink>
           <NavLink className="nav-link" to="/home">
             <i class="fa fa-usd" aria-hidden="true"></i> Finance
           </NavLink>
           <NavLink className="nav-link" to="/home">
-            <i class="fa fa-trophy" aria-hidden="true"></i> Sports
+            <i class="fa fa-trophy" aria-hidden="true"></i> Class
           </NavLink>
           <NavLink className="nav-link" to="/home">
             <i class="fa fa-bell" aria-hidden="true"></i> Notices
