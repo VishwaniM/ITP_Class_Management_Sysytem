@@ -31,9 +31,6 @@ app.use('/comments',commentRouter);
 app.use('/postcomment',postcomment);
 app.use('/newuser',newuser);
 
-
-
-
 const CONNECTION_URL = 'mongodb+srv://techdudes:techdudes123@cluster0.sx9rv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
