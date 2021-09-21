@@ -27,7 +27,7 @@ function RenderSideBar(props) {
     <Navbar>
       <Nav navbar>
         <NavItem>
-          <NavLink className="nav-link" to="/home">
+          <NavLink className="nav-link" to="/students">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> Students
           </NavLink>
           <NavLink className="nav-link" to="/home">
