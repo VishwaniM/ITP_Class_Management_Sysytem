@@ -46,6 +46,7 @@ export const ITEMS =
             id: 7,
             name:'Notices',
             image: 'assets/images/notice.jpg',
+            href:'/login-n'
             
         }    
          
