@@ -45,16 +45,16 @@ export default function AddNotice(props){
             <form onSubmit={sendData}>
             <div class="mb-3">
                 <label for="Subject" class="form-label">Notice Subject</label>
-                <input type="text" class="form-control" id="subject" aria-describedby="nothelp" onChange={(e)=>{
+                <input type="text" class="form-control" id="subject" aria-describedby="nothelp" maxLength = "100" onChange={(e)=>{
                     setSubject(e.target.value);
-                }}/>
-                <div id="nothelp" class="form-text">Please use propper Subject for your Notice!</div>
+                }}required />
+                <div id="nothelp" class="form-text">Please use propper Subject for your Notice!(Max 100 charactors)</div>
             </div>
             <div class="mb-3">
                 <label for="noticebody" class="form-label">Insert Your Notice</label>
-                <textarea class="form-control" id="noticebody" rows="10" style={{resize: "none"}} onChange={(e)=>{
+                <textarea class="form-control" id="noticebody" rows="10" style={{resize: "none"}} maxLength = "500" onChange={(e)=>{
                     setBody(e.target.value);
-                }}></textarea>
+                }}required ></textarea>
             </div>
         
            

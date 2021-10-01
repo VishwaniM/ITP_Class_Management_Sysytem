@@ -73,7 +73,7 @@ import {Link, withRouter,useHistory,Redirect} from 'react-router-dom';
                                
                             </div>
                             <div class="mb-3">
-                                <label for="Subject" class="form-label">Notice Subject</label>
+                                <label for="Subject" class="form-label">Password</label>
                                 <input name="password" type="password" class="form-control" id="subject" aria-describedby="nothelp" onChange={this.handleInputChange} autocomplete="off"/>
                              
                             </div>
