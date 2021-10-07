@@ -23,7 +23,7 @@ class View extends Component {
             .then(Response => {
                 this.setState({ notice: Response.data })
                
-                console.log("eat this", this.state.notice[0].output)
+            
             }).catch(function (err) {
                 console.log(err);
             })

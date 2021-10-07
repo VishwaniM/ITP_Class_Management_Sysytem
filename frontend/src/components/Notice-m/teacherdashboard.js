@@ -47,10 +47,12 @@ function TDash(props){
                 </div>
                 <div className="col">
                 <div class="img-box">
+                <Link to={"/report"} className="addnotices">
                     <button className="addnotices">
                         <img src="/assets/images/report.png" width="240" alt=""/>
                         <figcaption className="figure-caption">View Your Reports</figcaption>
                     </button>
+                    </Link>
                     </div>
                 </div>
             </div>
