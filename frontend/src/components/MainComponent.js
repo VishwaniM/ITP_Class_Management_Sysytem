@@ -20,6 +20,7 @@ import Sresult from "./exam/studentresult"
 import Sschedule from "./exam/studentSchedule"
 import UpdateMark from "./exam/updateresult"
 import UpdateSche from "./exam/updateschedule"
+import Report from "./exam/report"
 
 
 class Main extends Component {
@@ -104,6 +105,11 @@ class Main extends Component {
             exact
             path="/editschedule/:id"
             render={(props) => <UpdateSche {...props}/>}
+          />
+          <Route
+            exact
+            path="/report"
+            render={(props) => <Report {...props}/>}
           />
          
           

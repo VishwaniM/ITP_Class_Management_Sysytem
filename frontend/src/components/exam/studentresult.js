@@ -30,10 +30,12 @@ export default function SearchResult(props){
         {}
         <label for="stdid" class="paperdownload"><b>Student ID:</b></label>
         
-        <input type="text" class="paperdownload" id="stdid" onChange={handleChange} />
-       <Link to={"/studentresult/"+stuid} className="btn btn-outline-primary"onClick={submit} style={{marginLeft:20}}  >Search</Link>
+        <input type="text" class="paperdownload" maxLength="10" id="stdid" onChange={handleChange} />
+       <Link to={"/studentresult/"+stuid} className="btn btn-info"onClick={submit} style={{marginLeft:20}}  >Search</Link>
 
         <div>
+            <br></br>
+            <h1 align="center"style={{marginRight:60}} ><u>RESULTS</u></h1>
         <table class="styled-table">
         <thead>
         <tr>
@@ -48,10 +50,10 @@ export default function SearchResult(props){
         
         <tbody>
             <tr class="active-row">
-                <td> {result.subjectname}</td>
-                <td>{result.grade}</td>
-                <td>{result.marks}</td>
-                <td>{result.examcode}</td>
+                <td scope = "row"> {result.subjectname}</td>
+                <td scope = "row">{result.grade}</td>
+                <td scope = "row">{result.marks}</td>
+                <td scope = "row">{result.examcode}</td>
             </tr>
         </tbody>
         ))}

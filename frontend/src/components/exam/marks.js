@@ -47,30 +47,30 @@ export default function Papers(){
             <form class="form" align="center" onSubmit={sendData} autocomplete="off">
             <br></br>  
             <div class="mb-3 container">
-                <label for="Subject" class="form-label" >Subject:</label>
-                <input type="text" placeholder="Enter Subject"class="form-control" id="subject" aria-describedby="nothelp" onChange={(e)=>{
+                <label for="Subject" class="form-label" ><b>Subject:</b></label>
+                <input type="text" placeholder="Enter Subject"class="form-control" maxLength="30" id="subject" aria-describedby="nothelp" onChange={(e)=>{
                     setSubject(e.target.value);
-                }}/>
+                }} required/>
 
             </div>
             <div class="mb-3 container">
-                <label for="Subject" class="form-label">Exam Code:</label>
+                <label for="Subject" class="form-label"><b>Exam Code:</b></label>
                 <input type="text" placeholder="Enter Exam Code"class="form-control" id="ExamCode"  aria-describedby="nothelp" onChange={(e)=>{
                     setExamcode(e.target.value);
-                }}/>
+                }}required/>
 
             </div>
             <div class="mb-3 container">
-                <label for="Subject" class="form-label">Student ID:</label>
-                <input type="text"placeholder="Enter Student ID" class="form-control" id="StudentID" aria-describedby="nothelp" onChange={(e)=>{
+                <label for="Subject" class="form-label"><b>Student ID:</b></label>
+                <input type="text"placeholder="Enter Student ID" class="form-control"maxLength="10" id="StudentID" aria-describedby="nothelp" onChange={(e)=>{
                     setStudentid(e.target.value);
-                }}/>
+                }}required/>
             </div>
             <div class="mb-3 container">
-                <label for="Marks" class="form-label">Marks:</label>
+                <label for="Marks" class="form-label"><b>Marks:</b></label>
                 <input type="text"placeholder="Enter Marks" class="form-control" id="marks"  aria-describedby="nothelp" onChange={(e)=>{
                     setMarks(e.target.value);
-                }}/>
+                }}required/>
             </div>
                     <button type="submit" class="container btn btn-success"style={{marginLeft:15}}>Submit</button>
             </form>

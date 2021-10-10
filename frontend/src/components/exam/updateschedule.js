@@ -69,9 +69,9 @@ export default class View extends Component{
 
         axios.put(`http://localhost:5000/schedule/updateschedule/${id}`,data).then((res)=>{
 
-          alert("succesfully Notices were updated")
+          alert("succesfully schedule were updated")
                  if(res.data.success){
-                    alert("succesfully Notices were updated")
+                    alert("succesfully schedule were updated")
                    
                      this.setState(
                          {
