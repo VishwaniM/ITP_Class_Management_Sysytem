@@ -1,13 +1,10 @@
-// import { formatMs } from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
 import { TextField, Button, Typography, Paper,Grid, FormLabel,FormControl,InputLabel,Select} from '@material-ui/core';
-import validator from 'validator';
 import FileBase from 'react-file-base64';
 import  { useDispatch, useSelector } from 'react-redux';
-
-
 import useStyles from './styles';
 import { createStudent, updateStudent } from '../../actions/students';
+
 
 const Form = ({ currentId, setCurrentId}) => {
     const [studentData, setStudentData] = useState({firstName: '', lastName: '', email: '', phoneNumber: '', grade: '', gender: '',birthday: '', address: '', fatherName: '', motherName: '', selectedFile: ''});
@@ -24,8 +21,7 @@ const Form = ({ currentId, setCurrentId}) => {
 
         if(currentId){
             dispatch(updateStudent(currentId, studentData));
-        }else{
-            //if
+        }else{            
             dispatch(createStudent(studentData));
         }
         clear();
@@ -36,43 +32,40 @@ const Form = ({ currentId, setCurrentId}) => {
         setCurrentId(null);
         setStudentData({firstName: '', lastName: '', email: '', phoneNumber: '', grade: '', gender: '',birthday: '', address: '', fatherName: '', motherName: '', selectedFile: ''});
     }
-
-    const [emailError, setEmailError] = useState('')
-    const validateEmail = (e) => {
-      var email = e.target.value
-    
-      if (validator.isEmail(email)) {
-        setEmailError('Valid Email :)')
-      } else {
-        setEmailError('Enter valid Email!')
-      }
-    }
-  
+ 
         
     
     return(
         <Paper className = {classes.paper}>
-            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+            <form autoComplete="off" className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
 
                 <Typography className = {classes.typography} variant="h4" >{currentId ? 'Edit Student' : 'Add New Student' } </Typography>
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={6}>
-                        <TextField name="First Name" variant="outlined" label="First Name" fullWidth value={studentData.firstName} onChange={(e) => setStudentData({...studentData, firstName: e.target.value})}/>
+                        <TextField required name="First Name" variant="outlined" label="First Name" fullWidth value={studentData.firstName} onChange={(e) => setStudentData({...studentData, firstName: e.target.value})}/>
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <TextField name="Last Name" variant="outlined" label="Last Name" fullWidth value={studentData.lastName} onChange={(e) => setStudentData({...studentData, lastName: e.target.value})}/>
+                        <TextField required name="Last Name" variant="outlined" label="Last Name" fullWidth value={studentData.lastName} onChange={(e) => setStudentData({...studentData, lastName: e.target.value})}/>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField name="Email" variant="outlined" label="Email" fullWidth value={studentData.email}  
-                        // onChange={(e) => setStudentData({...studentData, email: e.target.value})} onChange={(e) => validateEmail(e)}/><br />
-                        onChange={e => { setStudentData({...studentData, email: e.target.value}); validateEmail(e) }}/><br />
-                        <span style={{fontWeight: 'solid',color: 'red',marginLeft:'15px'}}>{emailError}</span>
+                        <TextField type="email" required name="Email" variant="outlined" label="Email" fullWidth value={studentData.email}  
+                        onChange={(e) => setStudentData({...studentData, email: e.target.value})}/><br />
+                        
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField name="Phone Number" variant="outlined" label="Phone Number" fullWidth value={studentData.phoneNumber} onChange={(e) => setStudentData({...studentData, phoneNumber: e.target.value})}/>
+                        <TextField
+                            type="tel"
+                            required
+                            name="Phone Number" 
+                            variant="outlined" 
+                            label="Phone Number" 
+                            inputProps={{minLength:10 }}
+                            fullWidth 
+                            value={studentData.phoneNumber} 
+                            onChange={(e) => setStudentData({...studentData, phoneNumber: e.target.value })}/>
                     </Grid>
 
         {/* grade picker */}
@@ -82,6 +75,7 @@ const Form = ({ currentId, setCurrentId}) => {
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel htmlFor="outlined-age-native-simple">Grade</InputLabel>
                             <Select
+                                required
                                 native
                                 value={studentData.grade}
                                 onChange={(e) => setStudentData({...studentData, grade: e.target.value})}
@@ -105,6 +99,7 @@ const Form = ({ currentId, setCurrentId}) => {
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel htmlFor="outlined-age-native-simple">Gender</InputLabel>
                             <Select
+                                required
                                 native
                                 value={studentData.gender}
                                 onChange={(e) => setStudentData({...studentData, gender: e.target.value})}
@@ -122,7 +117,7 @@ const Form = ({ currentId, setCurrentId}) => {
          {/* Birthday picker */}
                     <Grid item xs={12} sm={6}>
                     <form className={classes.container} noValidate>
-                        <TextField
+                        <TextField required
                             id="date"
                             label="Birthday"
                             type="date"
@@ -137,7 +132,7 @@ const Form = ({ currentId, setCurrentId}) => {
                     </Grid> 
 
                     <Grid item xs={12}>
-                        <TextField className={classes.textField}
+                        <TextField required className={classes.textField}
                             id="Address"
                             label="Address"
                             multiline
@@ -150,17 +145,17 @@ const Form = ({ currentId, setCurrentId}) => {
 
                     
                     <Grid item xs={12} sm={6}>
-                        <TextField name="Father's Name" variant="outlined" label="Father's Name" fullWidth value={studentData.fatherName}onChange={(e) => setStudentData({...studentData, fatherName: e.target.value})}/>
+                        <TextField required name="Father's Name" variant="outlined" label="Father's Name" fullWidth value={studentData.fatherName}onChange={(e) => setStudentData({...studentData, fatherName: e.target.value})}/>
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <TextField name="Mother's Name" variant="outlined" label="Mother's Name" fullWidth value={studentData.motherName}onChange={(e) => setStudentData({...studentData, motherName: e.target.value})}/>
+                        <TextField required name="Mother's Name" variant="outlined" label="Mother's Name" fullWidth value={studentData.motherName}onChange={(e) => setStudentData({...studentData, motherName: e.target.value})}/>
                     </Grid>
 
                     <Grid item xs={12}>                  
                         <div className={classes.fileInput}>
                             <FormLabel className={classes.formLabel}>Upload Image</FormLabel>   
-                            <FileBase type= "file" multiple = {false}onDone = {({base64}) => setStudentData({...studentData, selectedFile:base64})}/>
+                            <FileBase required type= "file" multiple = {false} onDone = {({base64}) => setStudentData({...studentData, selectedFile:base64})}/>
                         </div>
                     </Grid>
 

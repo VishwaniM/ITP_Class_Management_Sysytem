@@ -31,6 +31,7 @@ export const createStudent = (student) => async (dispatch) => {
         const { data } = await api.createStudent(student);
 
         dispatch({ type: 'CREATE', payload: data});
+        alert("Student Added Successfully");
     } catch (error) {
         console.log(error); 
     }
@@ -41,6 +42,7 @@ export const updateStudent = (id,student) => async (dispatch) => {
         const { data } = await api.updateStudent(id, student);
 
         dispatch({ type: 'UPDATE', payload: data});
+        alert("Student Updated Successfully");
     } catch (error) {
         console.log(error);
     }
@@ -51,7 +53,7 @@ export const deleteStudent = (id) => async (dispatch) => {
         await api.deleteStudent(id);
 
         dispatch( { type: 'DELETE', payload: id });
-        
+        alert("Deleted Successfully");
     } catch (error) {
         console.log(error);
         

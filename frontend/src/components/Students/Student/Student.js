@@ -1,18 +1,79 @@
-// import { formatMs } from '@material-ui/core';
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { useDispatch } from 'react-redux';
-
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { deleteStudent } from '../../../actions/students';
 
 import useStyles from './styles';
 
+
 const Student = ({ student, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    const pdfGenerate=({})=>{
+        var doc=new jsPDF('portrait','px','a4','false'); 
+        autoTable(doc, {html: '#my-table'})
+        doc.setFontSize(28);
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor(0,0,128)
+        doc.text(152, 60, "Student Profile");    
+        doc.addImage(student.selectedFile,'PNG',135,80,180,200);
+        doc.setFontSize(18);
+        doc.setFont(undefined, 'bold');
+        
+        doc.autoTable({
+            startY:290,
+            margin:50,
+            theme:'plain',     
+            columnStyles: { 0: { halign: 'center' } },
+            alternateRowStyles:{fontSize:18, fontStyle:'bold'},
+            body:[
+                
+                [[student.firstName+" "+student.lastName]],
+            ],
+        })
+        
+        var date=new Date().toLocaleDateString();
+        
+        
+        doc.autoTable({
+            startY:320,
+            margin:50,
+            columnStyles: { 1: { halign: 'right' } },
+            head:[['','Student Details']],
+            body:[
+                ['First Name',[student.firstName]],
+                ['Last Name',[student.lastName]],
+                ['Gender'  , [student.gender]],
+                ['Date of Birth'  , [student.birthday]],
+                ['Father'  , [student.fatherName]],
+                ['Mother'  ,[student.motherName]],
+                ['Email'  , [student.email]],
+                ['Phone Number'  ,'0'+ [student.phoneNumber]],
+                ['Address'  , [student.address]],
+                
+            ],
+        })
+        doc.autoTable({
+            startY:560,
+            margin:50,
+            theme:'plain',            
+            
+            columnStyles: { 1: { halign: 'right' } },
+            alternateRowStyles:{fontSize:8, fontStyle:'italic'},
+            body:[
+                
+                ['Dekma Institute Matara', 'Generated on'+' '+[date]],
+            ],
+        })
+        doc.save('Report.pdf');
+    }
+    
     return(
        <Card className={classes.card }raised elevation = {6}>
            <CardMedia className= {classes.media} image={student.selectedFile} title= {student.title}/>
@@ -24,8 +85,8 @@ const Student = ({ student, setCurrentId }) => {
            <div className={classes.overlay2}>
                <Button 
                     style={{color:'white'}} 
-                    size="small" 
-                    onClick={() => {}}>
+                    size="small"                     
+                    onClick={pdfGenerate}>
                     <GetAppIcon fontSize="default"/>
                </Button>
            </div>
@@ -69,7 +130,7 @@ const Student = ({ student, setCurrentId }) => {
                     
                     <div>
                         <label>Phone Number:</label>
-                        <Typography variant="p" color="primary" gutterBottom> {student.phoneNumber} </Typography>
+                        <Typography variant="p" color="primary" gutterBottom> {'0'+student.phoneNumber} </Typography>
                     </div> 
                     
                     <div>
