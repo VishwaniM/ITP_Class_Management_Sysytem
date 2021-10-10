@@ -14,10 +14,12 @@ import { NavLink } from "react-router-dom";
 function RenderMenuItem({ item, onClick }) {
   return (
     <Card onClick={() => onClick(item.id)}>
+      <a href={item.href}>
       <CardImg width="100%" height="280px" src={item.image} alt={item.name} />
       <CardImgOverlay>
         <CardTitle>{item.name}</CardTitle>
       </CardImgOverlay>
+      </a>
     </Card>
   );
 }
@@ -48,7 +50,7 @@ function RenderSideBar(props) {
           <NavLink className="nav-link" to="/home">
             <i class="fa fa-university" aria-hidden="true"></i> Class
           </NavLink>
-          <NavLink className="nav-link" to="/home">
+          <NavLink className="nav-link" to="/login-n">
             <i class="fa fa-bell" aria-hidden="true"></i> Notices
           </NavLink>
         </NavItem>
@@ -65,6 +67,8 @@ const Menu = (props) => {
       </div>
     );
   });
+
+  
 
   return (
     <div className="container">
