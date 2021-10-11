@@ -3,67 +3,67 @@ import ReactToPrint from 'react-to-print';
 import axios from 'axios';
 
 export class Report extends React.PureComponent {
-    constructor(props) {
+  constructor(props) {
 
-        super(props);
+    super(props);
 
-        this.state = {
+    this.state = {
+
+      date: Date().toLocaleString(),
+      notice: []
+
+    }
+  }
+  componentDidMount() {
+    axios.get("http://localhost:5000/postcomment/posts")
+      .then(Response => {
+        this.setState({ notice: Response.data })
+        console.log(this.state.notice)
+
+      }).catch(function (err) {
+        console.log(err);
+      })
+
+  }
+
+  render() {
+    return (
+      <div class="container" class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="container">
+         <h3> Notices Count :  {this.state.notice.length} </h3><br></br><br></br>
+          {this.state.notice.map(notice => (
+
+
+            <div class="container">
+              <div>
+                <h5>{notice.subject}</h5>Added time : {notice.time} <br></br>
+                {notice.output.map(output => (
+                  <div class="container">
+                   Feedback by <b>{output.userid} </b> :  {output.comment}
+                  </div>))}<br></br><br></br>
+              </div></div>
+          ))}
+
+
+        </div></div>
+    );
+  }
+}
+class Example extends React.PureComponent {
+  render() {
+    return (
+      <div>
+        <ReactToPrint
+          trigger={() => {
             
-            date: Date().toLocaleString(),
-            notice: []
-
-        }
-    }
-    componentDidMount() {
-        axios.get("http://localhost:5000/postcomment/posts")
-            .then(Response => {
-                this.setState({ notice: Response.data })
-                console.log(this.state.notice)
-               
-            }).catch(function (err) {
-                console.log(err);
-            })
-
-    }
-
-    render() {
-      return (
-          <div class="container">
-              {this.state.notice.map(notice => (
-                               <div>Post {notice.body.slice(0,10)}
-
- 
-  
-                           
-
-                  <div class="card-group">
-  <div class="card" style={{}}>
-    <div class="card-body">
-      <h5 class="card-title">{notice.subject.slice(0,10)}</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>   </div>  </div> ))}    
-        
-        </div>
-      );
-    }
+           
+            return <a href="#">Download Report!</a>;
+          }}
+          content={() => this.componentRef}
+        />
+        <Report ref={el => (this.componentRef = el)} />
+      </div>
+    );
   }
-  class Example extends React.PureComponent {
-    render() {
-      return (
-        <div>
-          <ReactToPrint
-            trigger={() => {
-              // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-              // to the root node of the returned component as it will be overwritten.
-              return <a href="#">Print this out!</a>;
-            }}
-            content={() => this.componentRef}
-          />
-          <Report ref={el => (this.componentRef = el)} />
-        </div>
-      );
-    }
-  }
-  export default Example;
+}
+export default Example;
