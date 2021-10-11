@@ -1,105 +1,105 @@
-import React, {useState,Component} from "react";
+import React, { useState, useRef ,useEffect} from 'react';
 import axios from "axios";
+import { API_URL } from '../../utils/constants'
+import Dropzone from 'react-dropzone';
+import Retrive from '../exam/retrievepapersSTUDENT'
 
-export default function PapaerDownload(){
 
-    const [subject, setSubject] = useState("");
-    const [grade,setGrade] = useState("");
-    const [year,setYear] = useState("");
- 
- 
-    function sendData(e){
-     e.preventDefault();
-     const newPaperdownload={
-        subject,
-        grade,
-        year,
-         
-     }
-     axios.post("http://localhost:8070/paperdownload/viewpaper",newPaperdownload).then(()=>{
-         alert("paper found")
-         window.location.reload();
-     }).catch((err)=>{
-         alert(err)
-     })
- }
- return(
-    <div className="container">
-        <br></br>
-        <div class="shadow p-3 mb-5 bg-body rounded">
-            <label for=" subject" class="paperdownload"> <b>Subject Name:</b></label>
-            <input type="text" class="paperdownload" id="subject" aria-describedby="nothelp" onChange={(e)=>{
-                setSubject(e.target.value);
-            }}/>
 
+const Papers = (props) => {
+
+    const [file, setFile] = useState(null);
+    const [fileTitle, setFileTitle] = useState ('');
+    const [previewSrc, setPreviewSrc] = useState(''); 
+    const [state, setState] = useState({
+        paperdescription: '',
+        year: ''
+        
+      });
+      const [errorMsg, setErrorMsg] = useState('');
+      const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); 
+      const dropRef = useRef(); 
+
+      const handleInputChange = (event) => {
+        setState({
+          ...state,
+          [event.target.name]: event.target.value
+        });
+      };
+
+
+    const handleOnSubmit = async (event) => {
+        event.preventDefault();
+        console.log(event.target[2].value)
+        try {
+            const { paperdescription, year} = state;
+         //   if (paperdescription.trim() !== '' && year.trim() ) {
+              if (file) {
+                const formData = new FormData();
+                formData.append('files', file);
+                formData.append('paperdescription', event.target[0].value);
+                formData.append('year', event.target[1].value);
+                
+        
+                setErrorMsg('');
+                await axios.post('http://localhost:5000/paper/uploadpaper', formData, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                });
+                
+              } else {
+                setErrorMsg('Please select a file to add.');
+                console.log("Please select a file to add")
+              }
+         //   } else {
+          //    setErrorMsg('Please enter all the field values.');
+           //   console.log("Please enter all the field values.")
+         //   }
+          } catch (error) {
+            error.response && setErrorMsg(error.response.data);
+            console.log("Error : "+error.response.data)
+          }
+      };
+    
+    
+      useEffect (() =>{
+        console.log("Name"+fileTitle);
+      });
+
+      const onDrop = (file) => {
+        const [uploadedFile] = file;
+        setFile(uploadedFile);
       
-        
-            <label for=" grade" class="paperdownload"><b>Grade:</b></label>
-            <input type="text" class="paperdownload" id="grade" aria-describedby="nothelp" onChange={(e)=>{
-                setGrade(e.target.value);
-            }}/>
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+          setPreviewSrc(fileReader.result);
+        };
+        fileReader.readAsDataURL(uploadedFile);
+        setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+    
+        dropRef.current.style.border = '2px dashed #e9ebeb';
+      };
+      const updateBorder = (dragState) => {
+        if (dragState === 'over') {
+          dropRef.current.style.border = '2px solid #000';
+        } else if (dragState === 'leave') {
+          dropRef.current.style.border = '2px dashed #e9ebeb';
+        }
+      };
+    
 
-        
-       
-            <label for="year" class="paperdownload"><b>Year:</b></label>
-            <input type="text" class="paperdownload" id="year" aria-describedby="nothelp" onChange={(e)=>{
-                setYear(e.target.value);
-            }}/>
+return(
+    <React.Fragment>
+   
+   <div className="container"align="center">
 
-        
-       
-                <button type="submit" class="btn btn-outline-primary"  style={{marginLeft:20}}>Search</button>
-                    <br></br><br></br><br></br>
-                  <p align="left">  <b> <u>Resulted Papers</u></b></p>
-                <table class="styled-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Subject Name</th>
-                        <th scope="col">Grade</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Link</th>
-                        <th scope="col">File Download</th>
-                        
-                    </tr>
-               </thead>
-                <tbody>
-                <tr class="active-row">
-                    <td scope="row">Science</td>
-                    <td scope="row">Grade 11</td>
-                    <td scope="row">2020</td>
-                    <td scope="row">sample data</td>
-                    <td scope="row"><div><button type="button" className="btn btn-outline-success">Download</button></div></td>
-                </tr>
-                <tr class="active-row">
-                    <td scope = "row">Science</td>
-                    <td>Grade 11</td>
-                    <td>2019</td>
-                    <td>sample data</td>
-                    <td scope="row"><div><button type="button" className="btn btn-outline-success" >Download</button></div></td>
-                </tr>
-                <tr class="active-row">
-                    <td>Science</td>
-                    <td>Grade 11</td>
-                    <td>2018</td>
-                    <td>sample data</td>
-                    <td scope="row"><div><button type="button" className="btn btn-outline-success">Download</button></div></td>
-                </tr>
-                </tbody>
-                </table>
-            </div>
-        
+        <Retrive/>
     </div>
-
-
-        
     
-
-    
+    </React.Fragment>
+   
 )
-
-
-    
-        
-    
     
 }
+export default Papers;

@@ -112,6 +112,7 @@ router.route("/findresult/:userid").get(async (req,res)=>{
         res.status(500).setDefaultEncoding({status: "Error with getting Results",error : err.message});
     })
 })
+
 router.route("/findmarks/:id").get(async (req, res) => {
     let uid = req.params.id;
     const marks = await Result.findById(uid).then((Marks) => {
@@ -119,6 +120,16 @@ router.route("/findmarks/:id").get(async (req, res) => {
     }).catch((err) => {
         console.log(err.message);
         res.status(500).setDefaultEncoding({ status: "Error with getting Marks", error: err.message });
+    })
+})
+//get marks by Subject
+router.route("/findsubresult/:subject").get(async (req,res)=>{
+    let subject = req.params.subject;
+    const result = await Result.find({subjectname :subject}).then((Result)=>{
+        res.json(Result)
+    }).catch((err)=>{
+        console.log(err.message);
+        res.status(500).setDefaultEncoding({status: "Error with getting Results",error : err.message});
     })
 })
 

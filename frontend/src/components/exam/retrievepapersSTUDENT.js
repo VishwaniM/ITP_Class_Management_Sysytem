@@ -60,17 +60,6 @@ const RetrievePapers = () => {
     }
   };
 
-  const DeleteFile = async (id, path, mimetype) => {
-    try {
-      await axios.delete(`http://localhost:5000/paper/removepaper/${id}`, {
-        
-      });
-      alert("Paper has beed Deleted")
-                window.location.reload();
-    } catch (error) {
-       console.log("Delete Error "+error);
-    }
-  };
 
 
 //extra
@@ -83,16 +72,18 @@ const filterData = filesList.filter( item => {
 //end extra
 
   return (
-    <div className = "table table-striped">
+    <div className="container"align="center">
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
       <div>
         <br></br>
         <h2>Papers</h2>
         <br></br>
-      <form class="form-inline my-2 my-lg-0">
+        <div className="container"align="center">
+           <form>
       <input class="form-control mr-sm-2" type="text" placeholder="Enter Paper Description Here" aria-label="Search" onChange={ e => setSearch(e.target.value)}/>
       <button class="btn btn-success " type="submit">Search</button>
     </form>
+    </div>
     <br></br>
       </div>
       <table class="styled-table">
@@ -100,7 +91,6 @@ const filterData = filesList.filter( item => {
           <tr>
             <th>Paper Description</th>
             <th>Year</th>
-            <th></th>
             <th></th>
             
           </tr>
@@ -123,17 +113,7 @@ const filterData = filesList.filter( item => {
                     </a>
                     
                   </td>
-                  <td>
-                    <a
-                      href="#/"
-                      onClick={() =>
-                        DeleteFile(_id, file_path, file_mimetype)
-                      }
-                    >
-                      Delete
-                    </a>
-                    
-                  </td>
+                
                  
                 </tr>
               )

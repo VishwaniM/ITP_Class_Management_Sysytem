@@ -46,7 +46,10 @@ const Papers = (props) => {
                   headers: {
                     'Content-Type': 'multipart/form-data'
                   }
+                  
                 });
+                alert("Paper has beed added")
+                window.location.reload();
                 
               } else {
                 setErrorMsg('Please select a file to add.');
