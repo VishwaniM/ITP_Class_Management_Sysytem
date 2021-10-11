@@ -27,7 +27,7 @@ export class Report extends React.PureComponent {
         axios.get("http://localhost:5000/result/viewall")
             .then(Response => {
                 this.setState({ marks: Response.data })
-                console.log("All result of marks ", this.state.marks);
+        
                 for (let index = 0; index < this.state.marks.length; ++index) { //getting Only Subjects
 
                     this.state.markssubs[index] = this.state.marks[index].subjectname;
@@ -40,7 +40,7 @@ export class Report extends React.PureComponent {
                 for (let outer = 0; outer < uniquesubs.length; ++outer) {
 
                     const sub = uniquesubs[outer];
-                    console.log("Loop index marks", sub)
+                   
 
                     axios.get(`http://localhost:5000/result/findsubresult/${sub}`)
                         .then(Response => {
@@ -56,7 +56,7 @@ export class Report extends React.PureComponent {
 
                                 this.state.subandmarks[outer] = total;
                                 this.state.allmarks = this.state.subandmarks;
-                                console.log("Total is ", this.state.subandmarks)
+                                
 
 
                             }
@@ -64,13 +64,13 @@ export class Report extends React.PureComponent {
 
 
                         }).catch(function (err) {
-                            console.log(err);
+                            
                         })
                 }
 
 
             }).catch(function (err) {
-                console.log(err);
+               
             })
 
 
@@ -80,7 +80,7 @@ export class Report extends React.PureComponent {
         axios.get("http://localhost:5000/schedule/viewall")
             .then(Response => {
                 this.setState({ schedules: Response.data })
-                console.log("Schedule ", this.state.schedules)
+              
 
 
             }).catch(function (err) {
