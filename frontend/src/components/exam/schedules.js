@@ -31,11 +31,11 @@ export default function Schedules(){
                 setErrorname("")
             }
 
-            if(date_time.length>18){
-                setErrordate("Maximum Charactors 20 Reached")
+            if(date_time.length>23){
+                setErrordate("Maximum Charactors 25 Reached")
             }
 
-            if(date_time.length<19){
+            if(date_time.length<24){
                 setErrordate("")
             }
 
@@ -69,21 +69,21 @@ return(
         <br></br>  <br></br>  <br></br>  
         <div class="mb-3 container">
             <label for="schedule_description" class="form-label">Enter Schedule Description:</label>
-            <input type="text"placeholder="Enter Schedule Description" class="form-control"maxLength="50" id="schedule_description" aria-describedby="nothelp" onChange={(e)=>{
+            <input type="text"placeholder="Enter Schedule Description" class="form-control"maxLength="50" id="schedule_description" aria-describedby="nothelp" value={schedule_description}onChange={(e)=>{
                 setSchedule_description(e.target.value); Validation();
             }}required/><p style={{color:"red"}}>{error}</p>
 
         </div>
         <div class="mb-3 container">
             <label for="examiner_name" class="form-label">Enter Examiner Name:</label>
-            <input type="text"placeholder="Enter Examiner Name" class="form-control" id="examiner_name" maxLength="20" aria-describedby="nothelp" onChange={(e)=>{
+            <input type="text"placeholder="Enter Examiner Name" class="form-control" id="examiner_name" maxLength="20" value={examiner_name}aria-describedby="nothelp" onChange={(e)=>{
                 setExaminer_name(e.target.value);  Validation();
             }}required/><p style={{color:"red"}}>{errorname}</p>
 
         </div>
         <div class="mb-3 container">
             <label for="date_time" class="form-label">Enter Date and Time:</label>
-            <input type="text"placeholder="Enter Date and Time" class="form-control" id="date_time" maxLength="20" aria-describedby="nothelp" onChange={(e)=>{
+            <input type="text"placeholder="Enter Date and Time" class="form-control" id="date_time" maxLength="25" value={date_time}aria-describedby="nothelp" onChange={(e)=>{
                 setTime(e.target.value); Validation();
             }}required/><p style={{color:"red"}}>{errordate}</p>
 
@@ -94,8 +94,16 @@ return(
                 
 
         </form>
-        
         <br></br><br></br><br></br>
+        <button class="btn btn-success" onClick={(e) => {
+                    setSchedule_description("Sinhala Subject Excam")
+                    setExaminer_name("Kamala Weerasekara")
+                    setTime("2021/01/06 at 10:00Am")
+
+                }}>
+
+                    Demo Button
+                </button>
         <ViewSchedule/>
     </div>
 )

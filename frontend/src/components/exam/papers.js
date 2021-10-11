@@ -150,8 +150,10 @@ return(
                 <button type="submit" class="container btn btn-success"style={{marginLeft:15}}>Submit</button>
         </form>
         <br></br>
+        
         <br></br> <br></br> <br></br>
         <Retrive/>
+
     </div>
     
     </React.Fragment>
