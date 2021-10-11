@@ -11,12 +11,19 @@ const paperSchema = new Schema({
         type : String,
         required: true
     },
-    file : {
-        type : String,
+    file_path: {
+        type: String,
         required: true
+      },
+      file_mimetype: {
+        type: String,
+        required: true
+      }
     },
-
-})
+    {
+      timestamps: true
+    }
+  );
 
 //Paper is the Document name(Table name)
 const Paper = mongoose.model("Paper",paperSchema);

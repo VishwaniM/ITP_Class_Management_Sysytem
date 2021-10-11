@@ -1,75 +1,138 @@
-import express from 'express';
-const router = express.Router();
+import path from 'path'
+import express from 'express'
+import multer from 'multer'
+import File from '../../models/exam/paper.js';
+const __dirname = path.resolve();
 
-import Paper from '../../models/exam/paper.js'
+const Router = express.Router();
 
-//routing to /addpapers for add papers
-router.route("/addpaper").post((req,res)=>{
-    //getting values from frontend body
-        const paperdescription = req.body.paperdescription;
-        const year = req.body.year;
-        const file = req.body.file;
-        
-    
-        const newPaper = new Paper({
+const upload = multer({
+    storage: multer.diskStorage({
+      destination(req, file, cb) {
+        cb(null, './ReferencePaper');
+      },
+      filename(req, file, cb) {
+        cb(null, `${new Date().getTime()}_${file.originalname}`);
+      }
+    }),
+    limits: {
+      fileSize: 1024 * 1024 * 2 // max file size 2MB 
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(pdf|doc|docx|xlsx|xls)$/)) {
+        return cb(
+          new Error(
+            'Please Uploadfiles only with the extensions pdf, doc, docx, xslx, xls.'
+          )
+        );
+      }
+      cb(undefined, true); // continue with upload
+    }
+  });
+
+  Router.post(
+    '/uploadpaper',
+    upload.single('files'),
+    async (req, res) => {
+      try {
+        const { paperdescription, year } = req.body;
+        const { path, mimetype } = req.file;
+        const file = new File({
             paperdescription,
             year,
-            file
-        })
-        newPaper.save().then(()=>{
-            res.json("Paper Added")
-        }).catch((err)=>{
-            console.log(err);
-        })
-    })
-
-    //Routing for retrieve all papers
-router.route("/viewall").get((req,res)=>{
-    Paper.find().then((paper)=>{ //declaring a variable
-        res.json(paper) //sending all objects to the variable
-    }).catch((err)=>{
-        console.log(err)
-    })
-})
-
-//updating paper file
-router.route("/updatepaper/:id").put(async(req,res)=>{
-    let pid = req.params.id;
-    const {paperdescription, year, file} = req.body;
-
-    const updatePaper = { //assigning values to the object 
-        paperdescription,
-        year,
-        file
+          file_path: path,
+          file_mimetype: mimetype
+        });
+        await file.save();
+        res.send('Paper has been uploaded');
+      } catch (error) {
+        res.status(400).send('Error uploading'+ error);
+      }
+    },
+    (error, req, res, next) => {
+      if (error) {
+        res.status(500).send(error.message);
+      }
     }
-    const update = await Paper.findByIdAndUpdate(pid,updatePaper).then(()=>{
-        res.status(200).send({status: "Paper details Updated"})
-    }).catch((err)=>{
-        console.log(err);
-        res.status(500).send({status:"Error with updating Papers", error: err.message});
-    })
-})
+  );
 
-//deleting specific paper object
-router.route("/deletepaper/:id").delete(async(req,res)=>{
-    let pid = req.params.id;
-    await Paper.findByIdAndDelete(pid).then(()=>{
-        res.status(200).send({staus: "Paper deleted"});
-    }).catch((err)=>{
-        console.log(err.message);
-        res.status(500).send({status: "Error with deleting Paper", error: err.message})
-    })
-})
+  Router.get('/downloadpapers', async (req, res) => {
+    try {
+      const files = await File.find({});
+      const sortedByCreationDate = files.sort(
+        (a, b) => b.createdAt - a.createdAt
+      );
+      res.send(sortedByCreationDate);
+    } catch (error) {
+      res.status(400).send('Something went wrong while downloading papers');
+    }
+  });
+  
+  Router.get('/downloadpapers/:id', async (req, res) => {
+      
+    try {
+      const file = await File.findById(req.params.id);
+      res.set({
+        'Content-Type': file.file_mimetype
+      });
+     res.sendFile(path.join(__dirname , '..', 'backend' ,file.file_path));
+  
+    } catch (error) {
+      res.status(400).send('Something went wrong while downloading papers '+ error);
+    }
+  });
 
-//retriving specified paper
-router.route("/findpaper/:id").get(async (req,res)=>{
-    let pid = req.params.id;
-    const result = await Paper.findById(pid).then((Paper)=>{
-        res.status(200).send({status: "Paper found", Paper})
-    }).catch((err)=>{
-        console.log(err.message);
-        res.status(500).setDefaultEncoding({status: "Error with getting Papers",error : err.message});
-    })
-})
+  Router.put('/updatepapers', async (req,res) => {
 
-export default router;
+    const NewpaperDdescription =req.body.NewpaperDdescription;
+    const NewYear = req.body.NewYear;
+    const Newid = req.body.id;
+    console.log(NewpaperDdescription,NewYear,Newid);
+    
+      try {
+      
+        await File.findById(Newid, (error,updateRecord)=>{
+          updateRecord.paperdescription = NewpaperDdescription;
+          updateRecord.year = NewYear;
+          updateRecord.save();
+        });
+        
+      } catch (error) {
+        console.log(error);
+      }
+      res.send('file updated successfully.');
+    });
+    
+    Router.get('/downloadpaper/:id', async (req, res) => {
+        try {
+          const id= req.params.id
+          const files = await File.findById(id);
+         res.send({status:"Papers fetched" ,files});
+        } catch (error) {
+          console.log(error);
+          res.status(400).send('Something went wrong');
+        }
+      });
+
+      Router.delete('/removepaper/:id', async (req,res) =>{
+        const id = req.params.id
+        await File.findByIdAndRemove(id).exec()
+        res.send("Paper Deleted");
+      })
+
+      Router.get('/searchpaper', (req, res,next) => {
+
+        const searchField= req.query.paperdescription;
+        File.find({paperdescription:{$regex: searchField, $options: '$i'}}).then(data=>{
+          res.send(data);
+        })
+      
+    })
+      //http://localhost:5000/paper/searchpaper?paperdescription=description 2 
+
+
+
+
+
+
+export default Router;
