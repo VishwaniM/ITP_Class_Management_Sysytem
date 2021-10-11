@@ -185,18 +185,22 @@ export class Report extends React.PureComponent {
 
 
             </div>
+
         );
     }
 }
 class Example extends React.PureComponent {
     render() {
         return (
-            <div>
+            <div style={{marginLeft:15}}>
+                <br></br><br></br>
                 <ReactToPrint
                     trigger={() => {
                         // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
                         // to the root node of the returned component as it will be overwritten.
-                        return <a href="#">Print this out!</a>;
+                        
+                        
+                        return <a href="#"className="btn btn-info"style={{marginLeft:15}}>Print this out!</a>;
                     }}
                     content={() => this.componentRef}
                 />

@@ -90,7 +90,7 @@ const filterData = filesList.filter( item => {
         <h2>Papers</h2>
         <br></br>
       <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Enter Paper Description Here" aria-label="Search" onChange={ e => setSearch(e.target.value)}/>
+      <input class="form-control mr-sm-2" type="text"style={{marginLeft:55}} placeholder="Enter Paper Description Here" aria-label="Search" onChange={ e => setSearch(e.target.value)}/>
       <button class="btn btn-success " type="submit">Search</button>
     </form>
     <br></br>
