@@ -42,11 +42,6 @@ class View extends Component {
 
                 {this.state.notice.map(notice => (
 
-                    /* <div>
-                            <p>{notice.subject} </p>
-                            <p>{notice.body} </p>
-                        
-                        </div>*/
                         
                     <div class="container">
                         <div class="shadow-lg p-3 mb-5 bg-white rounded">
