@@ -22,8 +22,8 @@ class View extends Component {
         axios.get("http://localhost:5000/postcomment/posts")
             .then(Response => {
                 this.setState({ notice: Response.data })
-                // console.log("eat this",this.state.notice)
-                console.log("eat this", this.state.notice[0].output)
+               
+            
             }).catch(function (err) {
                 console.log(err);
             })
@@ -36,7 +36,8 @@ class View extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div class="container">
+                <div class="notisce"> </div>
                 Your Username :  {this.state.user}
 
                 {this.state.notice.map(notice => (
@@ -46,9 +47,11 @@ class View extends Component {
                             <p>{notice.body} </p>
                         
                         </div>*/
+                        
                     <div class="container">
+                        <div class="shadow-lg p-3 mb-5 bg-white rounded">
 
-                        <div class="col-md-8">
+                        <div class="col-notice-8">
                             <div class="media g-mb-30 media-comment">
                                 <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                                     <div class="g-mb-15">
@@ -57,16 +60,16 @@ class View extends Component {
                                     </div>
 
                                     <p>{notice.body}</p> <br></br>
-                                    <div>
+                                    <div class="shadow-sm p-3 mb-5 bg-white rounded">
                                         <Addcomment message={notice.notid} id={this.state.user} />
 
                                     </div>
                                     {notice.output.map(output => (
-                                        <div className="container">
+                                        <div class="container">
 
                                             <div class="col-md-8">
                                                 <div class="media g-mb-30 media-comment">
-                                                    <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                                                    <div class="shadow p-3 mb-5 bg-white rounded">
                                                         <div class="g-mb-15">
                                                             <span class="g-color-gray-dark-v4 g-font-size-12"><b>{output.userid}</b></span> on {output.time}
                                                             <span class="g-color-gray-dark-v4 g-font-size-12"></span>
@@ -83,7 +86,7 @@ class View extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></div>
                 ))}
             </div>
 

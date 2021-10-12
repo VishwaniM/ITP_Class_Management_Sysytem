@@ -45,7 +45,7 @@ import {Link, withRouter,useHistory,Redirect} from 'react-router-dom';
                 console.log(Response.data.user)
                 console.log(Response.data.user.usertype)
                 if(Response.data.user.usertype=='user')
-                 this.props.history.push("/viewNotice/"+Response.data.user.username);
+                 this.props.history.push("/s/"+Response.data.user.username);
                 else
                 this.props.history.push("/t/"+Response.data.user.username);
                 
