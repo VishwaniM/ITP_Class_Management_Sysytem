@@ -8,10 +8,10 @@ import StudentCom from "./StudentCom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import StudentList from "./StudentComponent";
-<<<<<<< HEAD
-=======
+
+
 import { useParams  } from "react-router-dom";
->>>>>>> main
+
 
 import { ITEMS } from "../shared/functionItems";
 import { STUDENTS } from "../shared/studentList";
@@ -104,10 +104,10 @@ class Main extends Component {
             component={() => <Report/>}
           />
       
-<<<<<<< HEAD
-=======
 
->>>>>>> main
+
+
+
           
           <Redirect to="/home" />
         </Switch>
