@@ -19,6 +19,7 @@ import View from "./Notice-m/viewnotice"
 import Addnot from "./Notice-m/addnotice"
 import Editnot from "./Notice-m/yournotices"
 import Edit from "./Notice-m/editnotices"
+import Report from "./Notice-m/report"
 
 
 
@@ -93,6 +94,11 @@ class Main extends Component {
             exact
             path="/edit/:id" 
             render={(props) => <Edit {...props}/>}
+          />
+          <Route
+            exact
+            path="/report"
+            component={() => <Report/>}
           />
       
 >>>>>>> 52e1060bdf9124b89dceabe0aa22dc69a6d1ee14
