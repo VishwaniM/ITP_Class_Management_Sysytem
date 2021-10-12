@@ -67,7 +67,11 @@ class Header extends Component {
               </Nav>
               <Nav navbar className="ml-auto">
                 <NavItem>
+<<<<<<< HEAD
                   <NavLink className="nav-link" to="/login-ex">
+=======
+                  <NavLink className="nav-link" to="/login-n">
+>>>>>>> main
                     <span className="fa fa-sign-in fa-lg"></span> Login
                   </NavLink>
                 </NavItem>
@@ -79,14 +83,14 @@ class Header extends Component {
           <div className="container">
             <div className="row row-header">
               <div className="col-12 col-sm-8">
-              <h1>DEKMA Institute Matara</h1>
+                <h1>DEKMA Institute Matara</h1>
                 <p>
-                Founded by Janaka Abeywardana in 2006, today, Dekma Higher Educational Institute has 
-                become the foremost learning center for the highest number of advanced level students in 
-                the Southern Province in Sri Lanka. Every year its students top the ranking in island’s A/L 
-                Examination but not limiting to that, the Institute also ensures its students are well 
-                disciplined, nature loving, creative humans who are ready to step out into the society. 
-                Thus the theme, “Education along with Humanity” at Dekma Higher Educational Institute.
+                  Founded by Janaka Abeywardana in 2006, today, Dekma Higher Educational Institute has
+                  become the foremost learning center for the highest number of advanced level students in
+                  the Southern Province in Sri Lanka. Every year its students top the ranking in island’s A/L
+                  Examination but not limiting to that, the Institute also ensures its students are well
+                  disciplined, nature loving, creative humans who are ready to step out into the society.
+                  Thus the theme, “Education along with Humanity” at Dekma Higher Educational Institute.
                 </p>
               </div>
               <div class="col-12 offset-sm-1 col-sm align-self-center">

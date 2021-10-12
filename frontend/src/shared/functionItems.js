@@ -3,8 +3,10 @@ export const ITEMS =
         {
         id: 0,
         name:'Students',
-        image: 'assets/images/student.jpg',
-                },
+        image: 'assets/images/student.jpg',   
+                     
+        },
+
         {
         id: 1,
         name:'Staff',
@@ -47,6 +49,7 @@ export const ITEMS =
             id: 7,
             name:'Notices',
             image: 'assets/images/notice.jpg',
+            href:'/login-n'
             
         }    
          

@@ -29,7 +29,7 @@ function RenderSideBar(props) {
     <Navbar>
       <Nav navbar>
         <NavItem>
-          <NavLink className="nav-link" to="/home">
+          <NavLink className="nav-link" to="/students">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> Students
           </NavLink>
           <NavLink className="nav-link" to="/home">
@@ -50,7 +50,7 @@ function RenderSideBar(props) {
           <NavLink className="nav-link" to="/home">
             <i class="fa fa-university" aria-hidden="true"></i> Class
           </NavLink>
-          <NavLink className="nav-link" to="/home">
+          <NavLink className="nav-link" to="/login-n">
             <i class="fa fa-bell" aria-hidden="true"></i> Notices
           </NavLink>
         </NavItem>
@@ -67,6 +67,8 @@ const Menu = (props) => {
       </div>
     );
   });
+
+  
 
   return (
     <div className="container">
