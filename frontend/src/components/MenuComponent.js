@@ -35,7 +35,7 @@ function RenderSideBar(props) {
           <NavLink className="nav-link" to="/home">
             <i class="fa fa-briefcase" aria-hidden="true"></i> Staff
           </NavLink>
-          <NavLink className="nav-link" to="/home">
+          <NavLink className="nav-link" to="login-ex">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Exams
           </NavLink>
           <NavLink className="nav-link" to="/home">

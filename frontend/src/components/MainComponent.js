@@ -24,6 +24,21 @@ import Report from "./Notice-m/report"
 
 
 
+import Login from "./exam/login";
+import Tdash from "./exam/teacherdashboard"
+import Sdash from "./exam/studentdashboard"
+import Result from "./exam/marks"
+import Schedule from "./exam/schedules"
+import Papers from "./exam/papers"
+import Paper from "./exam/papers";
+import Dpaper from "./exam/paperdownload"
+import Sresult from "./exam/studentresult"
+import Sschedule from "./exam/studentSchedule"
+import UpdateMark from "./exam/updateresult"
+import UpdateSche from "./exam/updateschedule"
+import Report from "./exam/report"
+
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -67,12 +82,64 @@ class Main extends Component {
           />
           <Route
             exact
+<<<<<<< HEAD
+            path="/login-ex"
+=======
             path="/login-n"
+>>>>>>> main
             component={() => <Login/>}
           />
           <Route
             exact
             path="/t/:id"
+<<<<<<< HEAD
+            component={() => <Tdash/>}
+          />
+          <Route
+            exact
+            path="/s/:id"
+            component={() => <Sdash/>}
+          />
+          <Route
+            exact
+            path="/marks"
+            component={() => <Result/>}
+          />
+          <Route
+            exact
+            path="/schedule"
+            component={() => <Schedule/>}
+          />
+          <Route
+            exact
+            path="/papers"
+            component={() => <Paper/>}
+          />
+          <Route
+            exact
+            path="/paperdownload"
+            component={() => <Dpaper/>}
+          />
+          <Route
+            exact
+            path="/studentresult/:id"
+            render={(props) => <Sresult {...props}/>}
+          />
+          <Route
+            exact
+            path="/studentschedule"
+            component={() => <Sschedule/>}
+          />
+          <Route
+            exact
+            path="/editmark/:id"
+            render={(props) => <UpdateMark {...props}/>}
+          />
+          <Route
+            exact
+            path="/editschedule/:id"
+            render={(props) => <UpdateSche {...props}/>}
+=======
             component={() => <Tdashboard/>}
           />
           <Route
@@ -94,14 +161,21 @@ class Main extends Component {
             exact
             path="/edit/:id" 
             render={(props) => <Edit {...props}/>}
+>>>>>>> main
           />
           <Route
             exact
             path="/report"
+<<<<<<< HEAD
+            render={(props) => <Report {...props}/>}
+          />
+         
+=======
             component={() => <Report/>}
           />
       
 >>>>>>> 52e1060bdf9124b89dceabe0aa22dc69a6d1ee14
+>>>>>>> main
           
           <Redirect to="/home" />
         </Switch>

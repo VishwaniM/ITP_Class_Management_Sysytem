@@ -14,11 +14,12 @@ export const ITEMS =
         
         },
         {
-        id: 2,
-        name:'Exams',
-        image: 'assets/images/exam.jpg',
-        
-        },
+            id: 2,
+            name:'Exams',
+            image: 'assets/images/exam.jpg',
+            href:'/login-ex'
+            
+            },
         {
         id: 3,
         name:'Subjects',
