@@ -16,10 +16,10 @@ export default function Schedules(){
 
     function Validation(){
         
-            if(schedule_description.length>48){
-                setError("Maximum Charactors 50 Reached")
+            if(schedule_description.length>98){
+                setError("Maximum Charactors 100 Reached")
             }
-            if(schedule_description.length<49){
+            if(schedule_description.length<99){
                 setError("")
             }
 
@@ -69,7 +69,7 @@ return(
         <br></br>  <br></br>  <br></br>  
         <div class="mb-3 container">
             <label for="schedule_description" class="form-label">Enter Schedule Description:</label>
-            <input type="text"placeholder="Enter Schedule Description" class="form-control"maxLength="50" id="schedule_description" aria-describedby="nothelp" value={schedule_description}onChange={(e)=>{
+            <input type="text"placeholder="Enter Schedule Description" class="form-control"maxLength="100" id="schedule_description" aria-describedby="nothelp" value={schedule_description}onChange={(e)=>{
                 setSchedule_description(e.target.value); Validation();
             }}required/><p style={{color:"red"}}>{error}</p>
 
@@ -95,15 +95,7 @@ return(
 
         </form>
         <br></br><br></br><br></br>
-        <button class="btn btn-success" onClick={(e) => {
-                    setSchedule_description("Sinhala Subject Excam")
-                    setExaminer_name("Kamala Weerasekara")
-                    setTime("2021/01/06 at 10:00Am")
-
-                }}>
-
-                    Demo Button
-                </button>
+        
         <ViewSchedule/>
     </div>
 )

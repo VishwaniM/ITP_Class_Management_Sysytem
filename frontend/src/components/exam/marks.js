@@ -103,18 +103,7 @@ export default function Papers() {
                 </div>
                 <button type="submit" class="container btn btn-success" style={{ marginLeft: 15 }}>Submit</button>
             </form>
-            <div>
-                <button class="btn btn-success" onClick={(e) => {
-                    setSubject("Sinhala")
-                    setExamcode("EX5475")
-                    setStudentid("IT20003364")
-                    setMarks("68")
-
-                }}>
-
-                    Demo Button
-                </button>
-            </div>
+            
             <br></br><br></br><br></br>
             <ViewMarks />
         </div>

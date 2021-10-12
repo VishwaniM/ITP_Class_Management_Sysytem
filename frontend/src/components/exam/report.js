@@ -42,7 +42,7 @@ export class Report extends React.PureComponent {
                     const sub = uniquesubs[outer];
                    
 
-                    axios.get(`http://localhost:5000/result/findsubresult/${sub}`)
+                   /* axios.get(`http://localhost:5000/result/findsubresult/${sub}`)
                         .then(Response => {
                             this.setState({ marksforsub: Response.data })
 
@@ -65,7 +65,7 @@ export class Report extends React.PureComponent {
 
                         }).catch(function (err) {
                             
-                        })
+                        })*/
                 }
 
 
@@ -196,8 +196,7 @@ class Example extends React.PureComponent {
                 <br></br><br></br>
                 <ReactToPrint
                     trigger={() => {
-                        // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-                        // to the root node of the returned component as it will be overwritten.
+                       
                         
                         
                         return <a href="#"className="btn btn-info"style={{marginLeft:15}}>Print this out!</a>;
