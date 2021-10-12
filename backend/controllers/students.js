@@ -5,8 +5,6 @@ export const getStudents = async (req, res)=>{
     try {
         const studentMessages = await studentMessage.find();
 
-        // console.log(studentMessages);
-
         res.status(200).json(studentMessages);
     } catch (error) {
         res.status(404).json({ message: error.message});
