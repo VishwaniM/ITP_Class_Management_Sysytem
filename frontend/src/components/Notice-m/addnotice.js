@@ -80,13 +80,7 @@ export default function AddNotice(props){
                     
         </div>
         
-            </form></div><button class="btn btn-success" onClick={()=>{
-                      setSubject("Covid Vaccination for SLIIT Students - Update")
-                      setBody("SLIIT is looking into the possibility of getting Covid 19 vaccination for our students. Accordingly, we are collecting data from interested students.")
-                    }}>
-
-                      Demo Button
-                    </button>
+            </form></div>
 
             
 
