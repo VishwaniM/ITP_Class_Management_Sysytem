@@ -8,7 +8,10 @@ import StudentCom from "./StudentCom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import StudentList from "./StudentComponent";
+
+
 import { useParams  } from "react-router-dom";
+
 
 import { ITEMS } from "../shared/functionItems";
 import { STUDENTS } from "../shared/studentList";
@@ -176,10 +179,16 @@ class Main extends Component {
       
 <<<<<<< HEAD
 
+<<<<<<< HEAD
+
+
+
+=======
 =======
 >>>>>>> 52e1060bdf9124b89dceabe0aa22dc69a6d1ee14
 >>>>>>> main
 >>>>>>> ff29178f3bde0a2d874d5ea3c7a5452576ec0a9f
+>>>>>>> origin/main
           
           <Redirect to="/home" />
         </Switch>
