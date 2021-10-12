@@ -17,15 +17,16 @@ const Student = ({ student, setCurrentId }) => {
 
     const pdfGenerate=({})=>{
         var doc=new jsPDF('portrait','px','a4','false'); 
-        autoTable(doc, {html: '#my-table'})
+
+    
         doc.setFontSize(28);
         doc.setFont(undefined, 'bold');
         doc.setTextColor(0,0,128)
-        doc.text(152, 60, "Student Profile");    
+        doc.text(152, 60, "Student Profile");
+
         doc.addImage(student.selectedFile,'PNG',135,80,180,200);
-        doc.setFontSize(18);
-        doc.setFont(undefined, 'bold');
-        
+                
+        autoTable(doc, {html: '#my-table'})
         doc.autoTable({
             startY:290,
             margin:50,
@@ -83,6 +84,7 @@ const Student = ({ student, setCurrentId }) => {
 
            </div>
            <div className={classes.overlay2}>
+    {/* download report button */}
                <Button 
                     style={{color:'white'}} 
                     size="small"                     
@@ -150,7 +152,7 @@ const Student = ({ student, setCurrentId }) => {
                         onClick={() => setCurrentId(student._id)}>
                         <EditIcon fontSize="small"/>
                         Edit
-                        {/* {student.likeCount} */}
+                        
                     </Button>
                     <Button size="small" color="secondary" onClick={() => dispatch(deleteStudent(student._id))}>
                         <DeleteIcon fontSize="small"/>
